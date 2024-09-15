@@ -13,8 +13,10 @@ return {
         "gitignore",
         "go",
         "graphql",
+        "html",
         "http",
         "java",
+        "javascript",
         "python",
         "php",
         "rust",
@@ -60,6 +62,7 @@ return {
       vim.filetype.add({
         extension = {
           mdx = "mdx",
+          ejs = "html",
         },
       })
       vim.treesitter.language.register("markdown", "mdx")

@@ -153,4 +153,16 @@ return {
       })
     end,
   },
+  
+  -- Setup prettier for EJS
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      local null_ls = require("null-ls")
+      opts.sources = opts.sources or {} -- Ensure that `opts.sources` is initialized
+      table.insert(opts.sources, null_ls.builtins.formatting.prettier.with({
+        filetypes = { "html", "ejs" }, -- Add ejs to filetypes handled by Prettier
+      }))
+    end,
+  },
 }
