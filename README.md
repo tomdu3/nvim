@@ -18,3 +18,4 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 ### Additional MarkDown setup
 
 - [The Perfect Neovim Note Takers Setup](https://www.youtube.com/watch?v=DgKI4hZ4EEI) by DevOps Toolbox
+- [Zettelkasten for progammers](https://youtu.be/z9IgFRAVV9w) by ZazenCodes
