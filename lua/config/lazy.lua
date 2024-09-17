@@ -63,3 +63,6 @@ require("lazy").setup({
     },
   },
 })
+
+-- require workflows.lua
+require("config.workflows")
