@@ -1,4 +1,4 @@
 return {
   "LazyVim/LazyVim",
-  import = "lazyvim.plugins.extras.coding.codeium",
+  import = "lazyvim.plugins.extras.ai.codeium",
 }
