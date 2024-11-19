@@ -167,13 +167,7 @@ return {
     ]]
 
       logo = string.rep("\n", 8) .. logo .. "\n\n"
-      require("dashboard").setup({
-        theme = "hyper",
-        config = {
-          header = vim.split(logo, "\n"),
-          -- Add other configurations here as needed
-        },
-      })
+      opts.config.header = vim.split(logo, "\n")
     end,
   },
 }
