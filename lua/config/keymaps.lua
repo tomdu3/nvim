@@ -53,6 +53,7 @@ end, opts)
 
 -- Map 'jk' to behave like Ctrl-C in Normal mode
 keymap.set("i", "jk", "<Esc>", opts)
+keymap.set("i", "kj", "<Esc>", opts)
 
 -- telescope
 vim.keymap.set("n", "<leader>fs", ":Telescope find_files<cr>")
