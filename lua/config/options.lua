@@ -4,6 +4,10 @@
 
 vim.opt.mouse = "a"
 
--- Undercurl
-vim.cmd([[let &t_Cs = "\e[4:3m"]])
-vim.cmd([[let &t_Ce = "\e[4:0m"]])
+-- Set colorcolumn for specific file types
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "python", "markdown" },
+  callback = function()
+    vim.opt_local.colorcolumn = "80,120"
+  end,
+})
