@@ -7,7 +7,15 @@
   },
   "neoconf": {
     "plugins": {
+<<<<<<< HEAD
       "lua_ls": {
+=======
+<<<<<<< HEAD
+      "lua_ls": {
+=======
+      "sumneko_lua": {
+>>>>>>> d8769e1 (feat: initial commit)
+>>>>>>> origin/main
         "enabled": true
       }
     }
