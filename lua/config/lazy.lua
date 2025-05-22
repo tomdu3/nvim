@@ -1,7 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -12,61 +13,70 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
+    -- 1. LazyVim core
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
       opts = {
-         -- colorscheme = "solarized-osaka",
+        -- colorscheme = "solarized-osaka",
       },
     },
-    -- import/override with your plugins
-    { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.formatting.prettier" },
+
+    -- 2. LazyVim extras (grouped by category)
+    -- Language support
     { import = "lazyvim.plugins.extras.lang.rust" },
-    -- { import = "lazyvim.plugins.extras.ai.codeium" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
 
+    -- Linting/formatting
+    { import = "lazyvim.plugins.extras.linting.eslint" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+
+    -- UI/UX enhancements
+    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+    -- { import = "lazyvim.plugins.extras.ai.codeium" },
+
+    -- 3. Your custom plugins
     { import = "plugins" },
-    { import = "fun" },
+    { import = "fun" }, -- Consider renaming this to something more descriptive
   },
   defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
     lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
+    version = false,
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  install = {
+    colorscheme = { "tokyonight", "habamax" },
+    missing = true, -- install missing plugins on startup
+  },
   checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+    enabled = true,
+    notify = false,
+    frequency = 3600, -- check once per hour
+  },
   performance = {
     rtp = {
-      -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
         "zipPlugin",
       },
     },
+    cache = {
+      enabled = true,
+    },
+  },
+  ui = {
+    border = "rounded", -- consider adding a nice border
   },
 })
 
--- require workflows.lua
+-- Load your workflows configuration
 require("config.workflows")
